@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+	"http://www.w3c.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>JiT RegEx</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript">
+//<![CDATA[
+
+/*
+ * Catch event and add to the event listener
+ *
+ * @param eventObj Event object, element in the document
+ * @param event Event to catch. e.g. "submit", "click"
+ * @param eventHandler Function handling this event
+ */
+function catchEvent(eventObj, event, eventHandler) {
+
+	if (eventObj.addEventListener) {
+		eventObj.addEventListener(event, eventHandler, false);
+	} else if (eventObj.attachEvent) {
+		event = "on" + event;
+		eventObj.attachEvent(event, eventHandler);
+	}
+}
+
+/*
+ * Cancel event.
+ *
+ * @event event Event catched
+ */
+function cancelEvent(event) {
+
+	if (event.preventDefault) {
+		event.preventDefault();
+		event.stopPropagation;
+	} else {
+		event.returnValue = false;
+		event.calcelBubble = true;
+	}
+}
+
+// load event setup
+catchEvent(window, "load", setupEvents);
+
+/*
+ * Setup event.
+ *
+ * @param evnt Event catched
+ */
+function setupEvents(evnt) {
+
+	catchEvent(document.getElementById("text2"), "blur", checkRequired);
+	catchEvent(document.getElementById("text1"), "change", validateField);
+}
+
+/*
+ * Check target required to be filled.
+ *
+ * @param evnt Event catched
+ */
+function checkRequired (evnt) {
+	var theEvent = evnt ? evnt : window.event;
+	var target = theEvent.target ? theEvent.target : theEvent.srcElement;
+	var txtInput = target.value;
+	if (txtInput == null || txtInput == "") {
+		alert("value is required in field");
+	}
+}
+
+/*
+ * Validate form whether it's an SSN.
+ *
+ * @param evnt Event catched
+ */
+function validateField(evnt) {
+
+	var theEvent = evnt ? evnt : window.event;
+	var target = theEvent.target ? theEvent.target : theEvent.srcElement;
+	var rgEx = /^\d{3}[-]?\d{2}[-]?\d{4}$/g;
+	var OK = rgEx.exec(target.value);
+	if (!OK) {
+		alert("not an ssn");
+	}
+}
+
+//]]>
+</script>
+</head>
+<body>
+	<form id="someForm" action="">
+		<p>
+			<input type="text" name="text1" id="text1" /><br />
+			<input type="password" name="text2" id="text2" />
+			<input type="hidden" name="text3" value="hidden value" /><br />
+			<textarea id="text4" cols="50" rows="10">The text area</textarea>
+			<input type="submit" value="Submit" />
+		</p>
+	</form>
+</body>
+</html>

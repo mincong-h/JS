@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xthml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>Hello, World!</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<script type="text/javascript">
+	function showBlock(event) {
+
+		var theEvent = event ? window.event;
+		var theSrc = theEvent.target ? theEvent.target : theEvent.srcElement;
+		var itemId = "elements" + theSrc.id.substr(5,1);
+		var item = document.getElementById(itemId);
+		if(item.style.display == 'none') {
+			item.style.display = 'block';
+		} else {
+			item.style.display = 'none';
+		}
+	}
+</script>
+</head>
+<body onload="testFunction();">
+<p>§5.3 函数字面量</p>
+</body>
+</html>
