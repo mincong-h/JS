@@ -1,4 +1,5 @@
-#Learning Javascript
+# Learning AngularJS 2
 
-I'm learning Javascript using the __Sbelley Powers__' book: __Learning Javascript__.    
-Here are the programs that I wrote when learning. 
+I'm learning AngularJS 2 using the official tutorial [Tour of Heroes][tutorial].
+
+[tutorial]: https://angular.io/docs/ts/latest/tutorial/
